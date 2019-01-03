@@ -1,0 +1,41 @@
+﻿@model PagedList.IPagedList<VetSystem.DBO.Models.Owners>
+@using PagedList.Mvc;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            @Html.ActionLink("Phone", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Email
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+        </tr>
+    }
+</table>
