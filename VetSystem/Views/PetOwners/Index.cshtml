@@ -4,16 +4,31 @@
     ViewData["Title"] = "Index";
 }
 
+<h2>Patients list</h2>
+<p>
+    @Html.ActionLink("Create New", "Create", "PetOwners")
+</p>
+<hr />
+@using (Html.BeginForm("Index", "PetOwners", FormMethod.Get))
+{
+<p>
+    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    Find by phone: @Html.TextBox("phoneFilter", ViewBag.PhoneFilter as string)
+    Find by email: @Html.TextBox("emailFilter", ViewBag.EmailFilter as string)
+    <input type="submit" value="Search" formmethod="post" />
+</p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            Id
         </th>
         <th>
             Name
         </th>
         <th>
-            @Html.ActionLink("Phone", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+            Phone
         </th>
         <th>
             Email
@@ -22,20 +37,24 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id })   
+        </td>
 
-        </tr>
+    </tr>
     }
 </table>
